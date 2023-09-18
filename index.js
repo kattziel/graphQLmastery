@@ -23,11 +23,11 @@ const server = new ApolloServer({
   introspection: true,
   cache: "bounded",
   // plugins: [ApolloServerPluginLandingPageLocalDefault()],
-  plugins: [
-    process.env.NODE_ENV === 'production'
-      ? ApolloServerPluginLandingPageProductionDefault({ embed: true, graphRef: "my-graph-id@my-graph-variant" })
-      : ApolloServerPluginLandingPageLocalDefault({ embed: false }),
-  ],
+  // plugins: [
+  //   process.env.NODE_ENV === 'production'
+  //     ? ApolloServerPluginLandingPageProductionDefault({ embed: true, graphRef: "my-graph-id@my-graph-variant" })
+  //     : ApolloServerPluginLandingPageLocalDefault({ embed: false }),
+  // ],
 });
 
 server.listen({ port: PORT }).then((result) => console.log(result.url));
