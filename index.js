@@ -22,10 +22,11 @@ const server = new ApolloServer({
   playground: true,
   introspection: true,
   cache: "bounded",
+  // plugins: [ApolloServerPluginLandingPageLocalDefault()],
   plugins: [
     process.env.NODE_ENV === 'production'
-      ? ApolloServerPluginLandingPageLocalDefault({ embed: true, graphRef: "my-graph-id@my-graph-variant" })
-      : ApolloServerPluginLandingPageProductionDefault({ embed: false }),
+      ? ApolloServerPluginLandingPageProductionDefault({ embed: true, graphRef: "my-graph-id@my-graph-variant" })
+      : ApolloServerPluginLandingPageLocalDefault({ embed: false }),
   ],
 });
 
