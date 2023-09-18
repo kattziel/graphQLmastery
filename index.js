@@ -14,7 +14,7 @@ const typeDefs = gql`
 
 const data = {
   greeting: "Hello, this is primary greeting vol. 2!",
-  interestingUrls: ["https://www.google.com"],
+  interestingUrls: ["https://www.google.com", "https://www.github.com"],
 };
 const server = new ApolloServer({
   typeDefs,
