@@ -10,16 +10,30 @@ const typeDefs = gql`
     greeting: String
     interestingUrls: [String]
     randomDiceThrow: Int
+    pi: Float
+    isTodayFriday: Boolean
+    randomCoinTossesUntilTrue: [Boolean]
   }
 `;
 function rootValue() {
   const getRandomDiceThrow = (sides) => Math.ceil(Math.random() * sides);
-  const data = {
+  const today = new Date();
+  const randomCoinToss = () => Math.random() > 0.5;
+  const getRandomCoinTossesUntilTrue = () => {
+    const result = [];
+    do {
+      result.push(randomCoinToss());
+    } while (!result[result.length - 1]);
+    return result;
+  };
+  return {
     greeting: "Hello, this is primary greeting vol. 2!",
     interestingUrls: ["https://www.google.com", "https://www.github.com"],
-    randomDiceThrow: getRandomDiceThrow(6)
+    randomDiceThrow: getRandomDiceThrow(6),
+    pi: Math.PI,
+    isTodayFriday: today.getDay() === 3,
+    randomCoinTossesUntilTrue: getRandomCoinTossesUntilTrue(),
   };
-  return data;
 }
 const server = new ApolloServer({
   typeDefs,
