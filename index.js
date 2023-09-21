@@ -3,10 +3,14 @@ const { ApolloServer, gql } = require("apollo-server");
 //   ApolloServerPluginLandingPageLocalDefault,
 //   ApolloServerPluginLandingPageProductionDefault,
 // } = require("apollo-server-core");
+const Quotes = require("inspirational-quotes");
 
 const PORT = process.env.PORT || 4000;
 const typeDefs = gql`
-  type Query {
+  schema {
+    query: MyQuery
+  }
+  type MyQuery {
     schroedingersCatGreeting: String
     greeting: String
     interestingUrls: [String]
@@ -16,6 +20,11 @@ const typeDefs = gql`
     randomCoinTossesUntilTrue: [Boolean]
     today: DayOfWeek
     workDays: [DayOfWeek]
+    randomQuote: Quote!
+  }
+  type Quote {
+    text: String!
+    author: String!
   }
   enum DayOfWeek {
     MON
@@ -50,6 +59,7 @@ function rootValue() {
     today: DAYS_OF_WEEK[today.getDay()],
     workDays: DAYS_OF_WEEK.slice(1, 5),
     schroedingersCatGreeting: randomCoinToss() ? "Meow" : null,
+    randomQuote: Quotes.getQuote(),
   };
 }
 const server = new ApolloServer({
