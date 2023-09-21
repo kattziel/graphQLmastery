@@ -11,8 +11,9 @@ const typeDefs = gql`
     query: MyQuery
   }
   type MyQuery {
-    schroedingersCatGreeting: String
+    "A simple greeting"
     greeting: String
+    "Simple array of URLs"
     interestingUrls: [String]
     randomDiceThrow: Int
     pi: Float
@@ -21,7 +22,10 @@ const typeDefs = gql`
     today: DayOfWeek
     workDays: [DayOfWeek]
     randomQuote: Quote!
+    schroedingersCatGreeting: String
   }
+  ## object representing a quote
+  # it contains text and author's name
   type Quote {
     text: String!
     author: String!
